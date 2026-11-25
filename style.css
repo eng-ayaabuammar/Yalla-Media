@@ -283,10 +283,9 @@ h3
     display: block;
 }
 
-.logo-for-dark,
-.logo-for-light
+.logo-for-dark
 {
-    transition: opacity .4s ease;
+    transition: opacity .4s ease-out;
 }
 
 .logo-for-light
@@ -298,6 +297,7 @@ h3
     height: 100%;
     object-fit: contain;
     opacity: 0;
+    transition: opacity .4s ease-in;
 }
 
 .header-logo .logo-for-dark
@@ -435,7 +435,6 @@ h3
 .service-card
 {
     position: relative;
-    padding: 1.8rem 1.5rem;
     background: #121212;
     border: 1px solid rgba(210, 171, 103, .25);
     border-radius: 16px;
@@ -460,20 +459,34 @@ h3
     border-color: #D2AB67;
 }
 
-.service-number
+.service-photo
 {
-    display: block;
-    font-size: 2.4rem;
-    font-weight: 900;
-    line-height: 1;
-    color: #A9782B;
-    direction: ltr;
-    text-align: right;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: #121212;
+}
+
+.service-photo img
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .6s ease;
+}
+
+.service-card:hover .service-photo img
+{
+    transform: scale(1.05);
+}
+
+.service-body
+{
+    padding: 1.5rem;
 }
 
 .service-card h3
 {
-    margin: .7rem 0 .8rem;
+    margin: 0 0 .8rem;
     font-size: 1.35rem;
     color: #F8E98E;
 }
@@ -502,6 +515,111 @@ h3
     height: 7px;
     background: #D2AB67;
     transform: rotate(45deg);
+}
+
+.team-tier
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.team-tier + .team-tier
+{
+    margin-top: 3rem;
+}
+
+.team-tier + .team-tier::before
+{
+    content: "";
+    width: 200px;
+    height: 2px;
+    margin-bottom: 3rem;
+    border-radius: 2px;
+    background: linear-gradient(90deg, transparent, #D2AB67, transparent);
+}
+
+.team-tier-title
+{
+    margin-bottom: 1.6rem;
+    font-size: 1.5rem;
+    color: #D2AB67;
+    text-align: center;
+}
+
+.team-cards
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.2rem;
+    width: 100%;
+}
+
+.team-card
+{
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+}
+
+.team-card-founders
+{
+    max-width: 480px;
+}
+
+.team-photo
+{
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: #121212;
+    border: 1px solid rgba(210, 171, 103, .35);
+    border-radius: 16px;
+    transition: border-color .3s;
+}
+
+.team-card-founders .team-photo
+{
+    aspect-ratio: 1 / 1;
+}
+
+.team-photo img
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform .6s ease;
+}
+
+.team-card:hover .team-photo
+{
+    border-color: #D2AB67;
+}
+
+.team-card:hover .team-photo img
+{
+    transform: scale(1.05);
+}
+
+.team-name
+{
+    margin-top: .9rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.5;
+    color: #F8E98E;
+}
+
+.team-name + .team-name
+{
+    margin-top: 0;
+}
+
+.team-role
+{
+    font-size: .95rem;
+    color: #D2AB67;
 }
 
 .initiative
@@ -627,6 +745,10 @@ h3
 {
     opacity: 1;
     transform: none;
+}
+.js .service-card.reveal
+{
+    transition: opacity .7s, transform .3s, border-color .3s;
 }
 
 @media (max-width: 899px)
@@ -782,11 +904,13 @@ body.light-mode
 .light-mode .logo-for-dark
 {
     opacity: 0;
+    transition: opacity .4s ease-in;
 }
 
 .light-mode .logo-for-light
 {
     opacity: 1;
+    transition: opacity .4s ease-out;
 }
 
 .light-mode .theme-button
@@ -884,6 +1008,33 @@ body.light-mode
 .light-mode .service-card:hover
 {
     border-color: #A9782B;
+}
+
+.light-mode .team-tier-title,
+.light-mode .team-role
+{
+    color: #A9782B;
+}
+
+.light-mode .team-tier + .team-tier::before
+{
+    background: linear-gradient(90deg, transparent, #A9782B, transparent);
+}
+
+.light-mode .team-photo
+{
+    background: #FFFFFF;
+    border-color: rgba(169, 120, 43, .4);
+}
+
+.light-mode .team-card:hover .team-photo
+{
+    border-color: #A9782B;
+}
+
+.light-mode .team-name
+{
+    color: #121212;
 }
 
 .light-mode .numbers
